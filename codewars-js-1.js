@@ -5,12 +5,14 @@
 function squareDigits(int) {
 	let squaredNumArray = [];
 	let numArray = Array.from(int.toString());
-	for (nums of numArray) {
-		let num = Math.pow(nums, 2);
+	for (meow of numArray) {
+		let num = Math.pow(Number(meow), 2);
 		squaredNumArray.push(num);
 	}
 	return Number(squaredNumArray.join(''));
 }
+
+squareDigits(123);
 
 // If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 // Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
@@ -31,6 +33,7 @@ function solution(num) {
 	);
 }
 
+solution(123)
 // A Narcissistic Number (or Armstrong Number) is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this Kata, we will restrict ourselves to decimal (base 10).
 // For example, take 153 (3 digits), which is narcissistic:
 //     1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
@@ -44,14 +47,15 @@ function solution(num) {
 function narcissistic(value) {
 	let valueString = value.toString();
 	let lengthOfBase = valueString.length;
-
 	let poweredStuff = 
     Array.from(value.toString())
-		.map((num) => Math.pow(num, lengthOfBase))
+		.map((num) => Math.pow(Number(num), lengthOfBase))
 		.reduce((acc, cur) => acc + cur, 0);
 
     return poweredStuff === value
 }
+
+narcissistic(123)
 
 // In this kata you will create a function that takes a list of non-negative integers and strings and returns a new list with the strings filtered out.
 function filter(array) {
@@ -59,4 +63,6 @@ function filter(array) {
 }
 
 console.log(filter([1,2,'a','b']))
+
+
 
