@@ -52,5 +52,3 @@ export const persistence = (num: number): number => {
   }
   return loopCounter;
 };
-
-console.log(persistence(25));
