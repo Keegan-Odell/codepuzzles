@@ -19,5 +19,4 @@ const persistence = (num) => {
     return loopCounter;
 };
 exports.persistence = persistence;
-console.log((0, exports.persistence)(25));
 //# sourceMappingURL=codewars-ts-3.js.map
