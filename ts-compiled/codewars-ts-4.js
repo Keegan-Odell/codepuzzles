@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.towerBuilder = exports.likes = void 0;
+exports.tribonacci = exports.findOutlier = exports.createPhoneNumber = exports.towerBuilder = exports.likes = void 0;
 const likes = (a) => {
     switch (a.length) {
         case 0:
@@ -17,7 +17,6 @@ const likes = (a) => {
     }
 };
 exports.likes = likes;
-console.log((0, exports.likes)(["Peter", "Alex", "Mark", "Max"]));
 const towerBuilder = (nFloors) => {
     let starTower = [];
     let stars = 1;
@@ -41,5 +40,41 @@ const towerBuilder = (nFloors) => {
     }
 };
 exports.towerBuilder = towerBuilder;
-console.log((0, exports.towerBuilder)(3));
+function createPhoneNumber(numbers) {
+    return `(${numbers[0]}${numbers[1]}${numbers[2]}) ${numbers[3]}${numbers[4]}${numbers[5]}-${numbers[6]}${numbers[7]}${numbers[8]}${numbers[9]}`;
+}
+exports.createPhoneNumber = createPhoneNumber;
+function findOutlier(integers) {
+    let evenNums = [];
+    let oddNums = [];
+    for (let nums of integers) {
+        if (nums % 2 === 0) {
+            evenNums.push(nums);
+        }
+        else {
+            oddNums.push(nums);
+        }
+    }
+    if (evenNums.length === 1) {
+        return evenNums[0];
+    }
+    else {
+        return oddNums[0];
+    }
+}
+exports.findOutlier = findOutlier;
+function tribonacci([a, b, c], n) {
+    let loopCounter = n;
+    let numsArray = [a, b, c];
+    while (loopCounter > 3) {
+        let number = numsArray[numsArray.length - 3] +
+            numsArray[numsArray.length - 2] +
+            numsArray[numsArray.length - 1];
+        numsArray.push(number);
+        loopCounter--;
+    }
+    return numsArray.splice(1, n);
+}
+exports.tribonacci = tribonacci;
+console.log(tribonacci([1, 1, 1], 10));
 //# sourceMappingURL=codewars-ts-4.js.map
