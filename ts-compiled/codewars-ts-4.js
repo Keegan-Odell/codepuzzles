@@ -73,7 +73,7 @@ function tribonacci([a, b, c], n) {
         numsArray.push(number);
         loopCounter--;
     }
-    return numsArray.splice(1, n);
+    return numsArray.splice(0, n);
 }
 exports.tribonacci = tribonacci;
 console.log(tribonacci([1, 1, 1], 10));
