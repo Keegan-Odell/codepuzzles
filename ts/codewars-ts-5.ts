@@ -17,20 +17,37 @@ export function duplicateCount(text: string): number {
   return counter;
 }
 
-// console.log(duplicateCount("TEST"))
+//The goal of this exercise is to convert a string to a new string where each character in the new string is "(" if that character appears only once in the original string, or ")" if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+//
+// Examples
+//
+// "din"      =>  "((("
+// "recede"   =>  "()()()"
+// "Success"  =>  ")())())"
+// "(( @"     =>  "))(("
+// Notes
+//
+// Assertion messages may be unclear about what they display in some languages. If you read "...It Should encode XXX", the "XXX" is the expected result, not the input!
 
-//DESCRIPTION:
-//
-// Create a function taking a positive integer between 1 and 3999 (both included) as its parameter and returning a string containing the Roman Numeral representation of that integer.
-//
-// Modern Roman numerals are written by expressing each digit separately starting with the left most digit and skipping any digit with a value of zero. In Roman numerals 1990 is rendered: 1000=M, 900=CM, 90=XC; resulting in MCMXC. 2008 is written as 2000=MM, 8=VIII; or MMVIII. 1666 uses each Roman symbol in descending order: MDCLXVI.
-//
-// Example:
-//
-// solution(1000); // should return 'M'
+export function duplicateEncode(word: string): string {
+  let wordArray: string[] = Array.from(word.toLowerCase());
+  let encodedArray: string[] = [];
+  let wordMap: Map<string, number> = new Map();
 
-export function romanNumber(number: number): string {
+  for (let char of wordArray) {
+    let wordCount: number = wordMap.get(char) || 0;
+    wordMap.set(char, (wordCount += 1));
+  }
 
+  for (let char of wordArray) {
+    if (wordMap.get(char)! > 1) {
+      encodedArray.push(")");
+    } else {
+      encodedArray.push("(");
+    }
+  }
+
+  return encodedArray.join("");
 }
 
-console.log(romanNumber(4));
+// console.log(duplicateEncode("Success"));

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.romanNumber = exports.duplicateCount = void 0;
+exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -17,38 +17,24 @@ function duplicateCount(text) {
     return counter;
 }
 exports.duplicateCount = duplicateCount;
-function romanNumber(number) {
-    let romanNumberArray = [];
-    while (number >= 1000) {
-        number -= 1000;
-        romanNumberArray.push("M");
+function duplicateEncode(word) {
+    let wordArray = Array.from(word.toLowerCase());
+    let encodedArray = [];
+    let wordMap = new Map();
+    for (let char of wordArray) {
+        let wordCount = wordMap.get(char) || 0;
+        wordMap.set(char, (wordCount += 1));
     }
-    while (number >= 500) {
-        number -= 500;
-        romanNumberArray.push("D");
+    for (let char of wordArray) {
+        if (wordMap.get(char) > 1) {
+            encodedArray.push(")");
+        }
+        else {
+            encodedArray.push("(");
+        }
     }
-    while (number >= 100) {
-        number -= 100;
-        romanNumberArray.push("C");
-    }
-    while (number >= 50) {
-        number -= 50;
-        romanNumberArray.push("L");
-    }
-    while (number >= 10) {
-        number -= 10;
-        romanNumberArray.push("X");
-    }
-    while (number >= 5) {
-        number -= 5;
-        romanNumberArray.push("V");
-    }
-    while (number >= 1) {
-        number -= 1;
-        romanNumberArray.push("I");
-    }
-    return romanNumberArray.join("");
+    return encodedArray.join("");
 }
-exports.romanNumber = romanNumber;
-console.log(romanNumber(4));
+exports.duplicateEncode = duplicateEncode;
+console.log(duplicateEncode("Success"));
 //# sourceMappingURL=codewars-ts-5.js.map
