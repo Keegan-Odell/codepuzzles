@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -79,5 +79,28 @@ function arrayDiff(a, b) {
     return a;
 }
 exports.arrayDiff = arrayDiff;
-console.log(arrayDiff([1, 2, 3], [1, 2]));
+function order(words) {
+    let wordMap = new Map();
+    let wordsArray = words.split(" ");
+    for (let word of wordsArray) {
+        for (let char of word) {
+            if (!isNaN(parseInt(char))) {
+                wordMap.set(parseInt(char), word);
+            }
+        }
+    }
+    wordMap = new Map([...wordMap.entries()].sort());
+    let solution = "";
+    for (let [key, value] of wordMap) {
+        if (key === 1) {
+            solution = value;
+        }
+        else {
+            solution = solution + " " + value;
+        }
+    }
+    return solution;
+}
+exports.order = order;
+console.log(order("is2 Thi1s T4est 3a"));
 //# sourceMappingURL=codewars-ts-5.js.map
