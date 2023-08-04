@@ -51,3 +51,53 @@ export function duplicateEncode(word: string): string {
 }
 
 // console.log(duplicateEncode("Success"));
+
+console.log("test");
+
+//https://www.codewars.com/kata/54da539698b8a2ad76000228/train/typescript
+export function isValidWalk(walk: string[]): boolean {
+  if (walk.length === 10) {
+    return isHome(walk);
+  } else {
+    return false;
+  }
+}
+
+function isHome(array: string[]): boolean {
+  let coordinates: { x: number; y: number } = {
+    x: 0,
+    y: 0,
+  };
+  for (let direction of array) {
+    switch (direction) {
+      case "n":
+        coordinates.y++;
+        break;
+      case "s":
+        coordinates.y--;
+        break;
+      case "e":
+        coordinates.x++;
+        break;
+      case "w":
+        coordinates.x--;
+        break;
+    }
+  }
+  return !coordinates.x && !coordinates.y;
+}
+
+// console.log(isValidWalk(["n", "w", "n", "w", "n", "w", "n", "w", "n", "w"]));
+
+//https://www.codewars.com/kata/523f5d21c841566fde000009/train/python
+export function arrayDiff(a: number[], b: number[]): number[] {
+  for (let nums of b) {
+    while (a.includes(nums)) {
+      let numToErase: number = a.indexOf(nums);
+      a.splice(numToErase, 1);
+    }
+  }
+  return a;
+}
+
+// console.log(arrayDiff([1, 2, 3], [1, 2]));

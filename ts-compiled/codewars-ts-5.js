@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -36,5 +36,48 @@ function duplicateEncode(word) {
     return encodedArray.join("");
 }
 exports.duplicateEncode = duplicateEncode;
-console.log(duplicateEncode("Success"));
+console.log("test");
+function isValidWalk(walk) {
+    if (walk.length === 10) {
+        return isHome(walk);
+    }
+    else {
+        return false;
+    }
+}
+exports.isValidWalk = isValidWalk;
+function isHome(array) {
+    let coordinates = {
+        x: 0,
+        y: 0,
+    };
+    for (let direction of array) {
+        switch (direction) {
+            case "n":
+                coordinates.y++;
+                break;
+            case "s":
+                coordinates.y--;
+                break;
+            case "e":
+                coordinates.x++;
+                break;
+            case "w":
+                coordinates.x--;
+                break;
+        }
+    }
+    return !coordinates.x && !coordinates.y;
+}
+function arrayDiff(a, b) {
+    for (let nums of b) {
+        while (a.includes(nums)) {
+            let numToErase = a.indexOf(nums);
+            a.splice(numToErase, 1);
+        }
+    }
+    return a;
+}
+exports.arrayDiff = arrayDiff;
+console.log(arrayDiff([1, 2, 3], [1, 2]));
 //# sourceMappingURL=codewars-ts-5.js.map
