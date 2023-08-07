@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -102,5 +102,34 @@ function order(words) {
     return solution;
 }
 exports.order = order;
-console.log(order("is2 Thi1s T4est 3a"));
+const isPangram = (phrase) => {
+    phrase = phrase.toLowerCase();
+    let uniqueLetters = [];
+    for (let chars of phrase) {
+        if (isChar(chars)) {
+            if (!uniqueLetters.includes(chars)) {
+                uniqueLetters.push(chars);
+            }
+        }
+    }
+    return uniqueLetters.length === 26;
+};
+exports.isPangram = isPangram;
+function isChar(char) {
+    return char.toLowerCase() !== char.toUpperCase();
+}
+const toCamelCase = (str) => {
+    let strArray = Array.from(str);
+    let i = 0;
+    for (let chars of strArray) {
+        if (chars === "-" || chars === "_") {
+            strArray.splice(i, 1);
+            strArray[i] = strArray[i].toUpperCase();
+        }
+        i += 1;
+    }
+    return strArray.join("");
+};
+exports.toCamelCase = toCamelCase;
+console.log((0, exports.toCamelCase)("the_stealth_warrior"));
 //# sourceMappingURL=codewars-ts-5.js.map

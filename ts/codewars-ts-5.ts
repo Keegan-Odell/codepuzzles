@@ -137,4 +137,41 @@ export function order(words: string): string {
   return solution;
 }
 
-console.log(order("is2 Thi1s T4est 3a"));
+// console.log(order("is2 Thi1s T4est 3a"));
+
+//https://www.codewars.com/kata/545cedaa9943f7fe7b000048/train/typescript
+
+export const isPangram = (phrase: string): boolean => {
+  phrase = phrase.toLowerCase();
+  let uniqueLetters: string[] = [];
+  for (let chars of phrase) {
+    if (isChar(chars)) {
+      if (!uniqueLetters.includes(chars)) {
+        uniqueLetters.push(chars);
+      }
+    }
+  }
+  return uniqueLetters.length === 26;
+};
+
+function isChar(char: string): boolean {
+  return char.toLowerCase() !== char.toUpperCase();
+}
+
+// console.log(isPangram("The quick brown fox jumps over the lazy dog."));
+
+//https://www.codewars.com/kata/517abf86da9663f1d2000003/train/javascript
+export const toCamelCase = (str: string): string => {
+  let strArray: string[] = Array.from(str);
+  let i: number = 0;
+  for (let chars of strArray) {
+    if (chars === "-" || chars === "_") {
+      strArray.splice(i, 1);
+      strArray[i] = strArray[i].toUpperCase();
+    }
+    i += 1;
+  }
+  return strArray.join("");
+};
+
+console.log(toCamelCase("the_stealth_warrior"));
