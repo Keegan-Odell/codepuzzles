@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -36,7 +36,6 @@ function duplicateEncode(word) {
     return encodedArray.join("");
 }
 exports.duplicateEncode = duplicateEncode;
-console.log("test");
 function isValidWalk(walk) {
     if (walk.length === 10) {
         return isHome(walk);
@@ -131,5 +130,28 @@ const toCamelCase = (str) => {
     return strArray.join("");
 };
 exports.toCamelCase = toCamelCase;
-console.log((0, exports.toCamelCase)("the_stealth_warrior"));
+const uniqueInOrder = (iterable) => {
+    let originalArray = Array.from(iterable);
+    let unqiueArray = [];
+    for (let i = 0; i < originalArray.length; i++) {
+        if (originalArray[i] !== originalArray[i + 1]) {
+            unqiueArray.push(originalArray[i]);
+            i += 1;
+        }
+    }
+    return unqiueArray;
+};
+exports.uniqueInOrder = uniqueInOrder;
+const breakCamel = (camelCase) => {
+    let camelCaseArray = Array.from(camelCase);
+    for (let i = 0; i < camelCaseArray.length; i++) {
+        if (camelCaseArray[i] === camelCaseArray[i].toUpperCase()) {
+            camelCaseArray.splice(i, 0, " ");
+            i += 1;
+        }
+    }
+    return camelCaseArray.join("");
+};
+exports.breakCamel = breakCamel;
+console.log((0, exports.breakCamel)("meowMeowMeow"));
 //# sourceMappingURL=codewars-ts-5.js.map

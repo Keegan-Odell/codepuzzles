@@ -52,8 +52,6 @@ export function duplicateEncode(word: string): string {
 
 // console.log(duplicateEncode("Success"));
 
-console.log("test");
-
 //https://www.codewars.com/kata/54da539698b8a2ad76000228/train/typescript
 export function isValidWalk(walk: string[]): boolean {
   if (walk.length === 10) {
@@ -174,4 +172,33 @@ export const toCamelCase = (str: string): string => {
   return strArray.join("");
 };
 
-console.log(toCamelCase("the_stealth_warrior"));
+// console.log(toCamelCase("the_stealth_warrior"));
+
+export const uniqueInOrder = <T>(iterable: T[]): T[] => {
+  let originalArray: T[] = Array.from(iterable);
+  let unqiueArray: T[] = [];
+  for (let i = 0; i < originalArray.length; i++) {
+    if (originalArray[i] !== originalArray[i + 1]) {
+      unqiueArray.push(originalArray[i]);
+      i += 1;
+    }
+  }
+  return unqiueArray;
+};
+
+// console.log(uniqueInOrder("AAAABBBCCDAABBB"));
+
+// https://www.codewars.com/kata/5208f99aee097e6552000148/train/javascript
+
+export const breakCamel = (camelCase: string): string => {
+  let camelCaseArray: string[] = Array.from(camelCase);
+  for (let i = 0; i < camelCaseArray.length; i++) {
+    if (camelCaseArray[i] === camelCaseArray[i].toUpperCase()) {
+      camelCaseArray.splice(i, 0, " ");
+      i += 1;
+    }
+  }
+  return camelCaseArray.join("");
+};
+
+console.log(breakCamel("meowMeowMeow"));
