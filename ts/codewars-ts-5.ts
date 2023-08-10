@@ -201,4 +201,24 @@ export const breakCamel = (camelCase: string): string => {
   return camelCaseArray.join("");
 };
 
-console.log(breakCamel("meowMeowMeow"));
+// console.log(breakCamel("meowMeowMeow"));
+
+// https://www.codewars.com/kata/546f922b54af40e1e90001da
+
+export const alphabetPosition = (text: string): string => {
+  const alphabetArray: string[] = Array.from(
+    { length: 26 },
+    (_, index: number) => String.fromCharCode(65 + index),
+  );
+  let textUpper: string = text.toUpperCase();
+  let textToNumber: string[] = [];
+
+  for (let letter of textUpper) {
+    if (alphabetArray.includes(letter)) {
+      textToNumber.push((alphabetArray.indexOf(letter) + 1).toString());
+    }
+  }
+  return textToNumber.join(" ");
+};
+
+console.log(alphabetPosition("asdf"));

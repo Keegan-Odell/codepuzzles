@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -153,5 +153,17 @@ const breakCamel = (camelCase) => {
     return camelCaseArray.join("");
 };
 exports.breakCamel = breakCamel;
-console.log((0, exports.breakCamel)("meowMeowMeow"));
+const alphabetPosition = (text) => {
+    const alphabetArray = Array.from({ length: 26 }, (_, index) => String.fromCharCode(65 + index));
+    let textUpper = text.toUpperCase();
+    let textToNumber = [];
+    for (let letter of textUpper) {
+        if (alphabetArray.includes(letter)) {
+            textToNumber.push((alphabetArray.indexOf(letter) + 1).toString());
+        }
+    }
+    return textToNumber.join(" ");
+};
+exports.alphabetPosition = alphabetPosition;
+console.log((0, exports.alphabetPosition)("asdf"));
 //# sourceMappingURL=codewars-ts-5.js.map
