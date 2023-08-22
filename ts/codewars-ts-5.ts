@@ -221,4 +221,81 @@ export const alphabetPosition = (text: string): string => {
   return textToNumber.join(" ");
 };
 
-console.log(alphabetPosition("asdf"));
+// console.log(alphabetPosition("meow"));
+
+export const greet = (name: string): string => {
+  return name === "Johnny" ? "Hello, my love!" : `Hello, ${name}`;
+};
+
+export const pigIt = (sentence: string): string | string[] => {
+  let sentenceArray: string[] = sentence.split(" ");
+  return sentenceArray.map(pigatize).join(" ");
+};
+
+function pigatize(word: string): string {
+  let punctuationRegex: RegExp = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+  if (punctuationRegex.test(word) || word === "") {
+    return word;
+  } else {
+    let wordArray: string[] = word.split("");
+    let letterToMove: string = wordArray[0];
+    wordArray.splice(0, 1);
+    wordArray.splice(wordArray.length, 0, letterToMove + "ay");
+    return wordArray.join("");
+  }
+}
+
+// console.log(pigIt("KCcnOIfhGsw "));
+
+export const dirReduc = (arr: string[]): string[] | string => {
+  //this is where we store our solved directions
+  let solvedDirection: string[] = [];
+
+  //loop through the OG directions
+  for (let directions of arr) {
+    if (
+      directions === "EAST" &&
+      solvedDirection[solvedDirection.length - 1] === "WEST"
+    ) {
+      solvedDirection.pop();
+    } else if (
+      directions === "WEST" &&
+      solvedDirection[solvedDirection.length - 1] === "EAST"
+    ) {
+      solvedDirection.pop();
+    } else if (
+      directions === "NORTH" &&
+      solvedDirection[solvedDirection.length - 1] === "SOUTH"
+    ) {
+      solvedDirection.pop();
+    } else if (
+      directions === "SOUTH" &&
+      solvedDirection[solvedDirection.length - 1] === "NORTH"
+    ) {
+      solvedDirection.pop();
+    } else {
+      solvedDirection.push(directions);
+    }
+  }
+
+  return solvedDirection;
+};
+
+console.log(
+  dirReduc([
+    "WEST",
+    "SOUTH",
+    "EAST",
+    "SOUTH",
+    "NORTH",
+    "EAST",
+    "SOUTH",
+    "NORTH",
+    "WEST",
+    "EAST",
+    "SOUTH",
+    "SOUTH",
+    "NORTH",
+    "NORTH",
+  ]),
+);

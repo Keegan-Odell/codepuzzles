@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -165,5 +165,68 @@ const alphabetPosition = (text) => {
     return textToNumber.join(" ");
 };
 exports.alphabetPosition = alphabetPosition;
-console.log((0, exports.alphabetPosition)("asdf"));
+const greet = (name) => {
+    return name === "Johnny" ? "Hello, my love!" : `Hello, ${name}`;
+};
+exports.greet = greet;
+const pigIt = (sentence) => {
+    let sentenceArray = sentence.split(" ");
+    return sentenceArray.map(pigatize).join(" ");
+};
+exports.pigIt = pigIt;
+function pigatize(word) {
+    let punctuationRegex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/;
+    if (punctuationRegex.test(word) || word === "") {
+        return word;
+    }
+    else {
+        let wordArray = word.split("");
+        let letterToMove = wordArray[0];
+        wordArray.splice(0, 1);
+        wordArray.splice(wordArray.length, 0, letterToMove + "ay");
+        return wordArray.join("");
+    }
+}
+const dirReduc = (arr) => {
+    let solvedDirection = [];
+    for (let directions of arr) {
+        if (directions === "EAST" &&
+            solvedDirection[solvedDirection.length - 1] === "WEST") {
+            solvedDirection.pop();
+        }
+        else if (directions === 'WEST' &&
+            solvedDirection[solvedDirection.length - 1] === 'EAST') {
+            solvedDirection.pop();
+        }
+        else if (directions === 'NORTH' &&
+            solvedDirection[solvedDirection.length - 1] === 'SOUTH') {
+            solvedDirection.pop();
+        }
+        else if (directions === 'SOUTH' &&
+            solvedDirection[solvedDirection.length - 1] === 'NORTH') {
+            solvedDirection.pop();
+        }
+        else {
+            solvedDirection.push(directions);
+        }
+    }
+    return solvedDirection;
+};
+exports.dirReduc = dirReduc;
+console.log((0, exports.dirReduc)([
+    "WEST",
+    "SOUTH",
+    "EAST",
+    "SOUTH",
+    "NORTH",
+    "EAST",
+    "SOUTH",
+    "NORTH",
+    "WEST",
+    "EAST",
+    "SOUTH",
+    "SOUTH",
+    "NORTH",
+    "NORTH",
+]));
 //# sourceMappingURL=codewars-ts-5.js.map
