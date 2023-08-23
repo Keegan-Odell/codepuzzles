@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -194,16 +194,16 @@ const dirReduc = (arr) => {
             solvedDirection[solvedDirection.length - 1] === "WEST") {
             solvedDirection.pop();
         }
-        else if (directions === 'WEST' &&
-            solvedDirection[solvedDirection.length - 1] === 'EAST') {
+        else if (directions === "WEST" &&
+            solvedDirection[solvedDirection.length - 1] === "EAST") {
             solvedDirection.pop();
         }
-        else if (directions === 'NORTH' &&
-            solvedDirection[solvedDirection.length - 1] === 'SOUTH') {
+        else if (directions === "NORTH" &&
+            solvedDirection[solvedDirection.length - 1] === "SOUTH") {
             solvedDirection.pop();
         }
-        else if (directions === 'SOUTH' &&
-            solvedDirection[solvedDirection.length - 1] === 'NORTH') {
+        else if (directions === "SOUTH" &&
+            solvedDirection[solvedDirection.length - 1] === "NORTH") {
             solvedDirection.pop();
         }
         else {
@@ -213,20 +213,22 @@ const dirReduc = (arr) => {
     return solvedDirection;
 };
 exports.dirReduc = dirReduc;
-console.log((0, exports.dirReduc)([
-    "WEST",
-    "SOUTH",
-    "EAST",
-    "SOUTH",
-    "NORTH",
-    "EAST",
-    "SOUTH",
-    "NORTH",
-    "WEST",
-    "EAST",
-    "SOUTH",
-    "SOUTH",
-    "NORTH",
-    "NORTH",
-]));
+const productFib = (prod) => {
+    let prevFib = 0;
+    let currentFib = 1;
+    let prodFib = 0;
+    while (prod > prodFib) {
+        currentFib = currentFib + prevFib;
+        prevFib = currentFib - prevFib;
+        prodFib = currentFib * prevFib;
+    }
+    if (prod - prodFib === 0) {
+        return [prevFib, currentFib, true];
+    }
+    else {
+        return [prevFib, currentFib, false];
+    }
+};
+exports.productFib = productFib;
+console.log((0, exports.productFib)(4895));
 //# sourceMappingURL=codewars-ts-5.js.map

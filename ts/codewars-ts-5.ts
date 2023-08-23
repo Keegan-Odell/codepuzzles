@@ -281,21 +281,41 @@ export const dirReduc = (arr: string[]): string[] | string => {
   return solvedDirection;
 };
 
-console.log(
-  dirReduc([
-    "WEST",
-    "SOUTH",
-    "EAST",
-    "SOUTH",
-    "NORTH",
-    "EAST",
-    "SOUTH",
-    "NORTH",
-    "WEST",
-    "EAST",
-    "SOUTH",
-    "SOUTH",
-    "NORTH",
-    "NORTH",
-  ]),
-);
+// console.log(
+//   dirReduc([
+//     "WEST",
+//     "SOUTH",
+//     "EAST",
+//     "SOUTH",
+//     "NORTH",
+//     "EAST",
+//     "SOUTH",
+//     "NORTH",
+//     "WEST",
+//     "EAST",
+//     "SOUTH",
+//     "SOUTH",
+//     "NORTH",
+//     "NORTH",
+//   ]),
+// );
+
+export const productFib = (prod: number): [number, number, boolean] => {
+  let prevFib: number = 0;
+  let currentFib: number = 1;
+  let prodFib: number = 0;
+
+  while (prod > prodFib) {
+    currentFib = currentFib + prevFib;
+    prevFib = currentFib - prevFib;
+    prodFib = currentFib * prevFib;
+  }
+
+  if (prod - prodFib === 0) {
+    return [prevFib, currentFib, true];
+  } else {
+    return [prevFib, currentFib, false];
+  }
+};
+
+console.log(productFib(4895));

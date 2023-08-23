@@ -55,4 +55,4 @@ export const findOddMap = (array: number[]): number => {
   return 0;
 };
 
-findOddMap([1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5]);
+// findOddMap([1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5]);

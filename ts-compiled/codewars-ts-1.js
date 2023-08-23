@@ -40,5 +40,4 @@ const findOddMap = (array) => {
     return 0;
 };
 exports.findOddMap = findOddMap;
-(0, exports.findOddMap)([1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5]);
 //# sourceMappingURL=codewars-ts-1.js.map
