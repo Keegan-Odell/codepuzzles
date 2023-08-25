@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -230,5 +230,59 @@ const productFib = (prod) => {
     }
 };
 exports.productFib = productFib;
-console.log((0, exports.productFib)(4895));
+const rot13 = (message) => {
+    let solvedMessage = [];
+    for (let letter of message) {
+        if (letter.toUpperCase() === letter.toLowerCase()) {
+            solvedMessage.push(letter);
+        }
+        else if (letter === letter.toUpperCase()) {
+            solvedMessage.push(letterShifter(letter).toUpperCase());
+        }
+        else {
+            solvedMessage.push(letterShifter(letter));
+        }
+    }
+    return solvedMessage.join("");
+};
+exports.rot13 = rot13;
+function letterShifter(letter) {
+    const alphabetArray = [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z",
+    ];
+    letter = letter.toLowerCase();
+    let position = alphabetArray.indexOf(letter) + 13;
+    if (position <= 25) {
+        return alphabetArray[position];
+    }
+    else {
+        return alphabetArray[position - 26];
+    }
+}
+console.log((0, exports.rot13)("m"));
 //# sourceMappingURL=codewars-ts-5.js.map

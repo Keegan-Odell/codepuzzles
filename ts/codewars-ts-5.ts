@@ -318,4 +318,61 @@ export const productFib = (prod: number): [number, number, boolean] => {
   }
 };
 
-console.log(productFib(4895));
+// console.log(productFib(4895));
+
+export const rot13 = (message: string): string => {
+  let solvedMessage: string[] = [];
+
+  for (let letter of message) {
+    if (letter.toUpperCase() === letter.toLowerCase()) {
+      solvedMessage.push(letter);
+    } else if (letter === letter.toUpperCase()) {
+      solvedMessage.push(letterShifter(letter).toUpperCase());
+    } else {
+      solvedMessage.push(letterShifter(letter));
+    }
+  }
+
+  return solvedMessage.join("");
+};
+
+function letterShifter(letter: string): string {
+  const alphabetArray: string[] = [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+  ];
+
+  letter = letter.toLowerCase();
+  let position: number = alphabetArray.indexOf(letter) + 13;
+  if (position <= 25) {
+    return alphabetArray[position];
+  } else {
+    return alphabetArray[position - 26];
+  }
+}
+
+console.log(rot13("m"));
