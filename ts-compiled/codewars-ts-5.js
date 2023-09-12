@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -284,5 +284,124 @@ function letterShifter(letter) {
         return alphabetArray[position - 26];
     }
 }
-console.log((0, exports.rot13)("m"));
+const formatDuration = (time) => {
+    const timeArray = time.split("");
+    let solvedArray = [];
+    let hourArray = [];
+    let minuteArray = [];
+    let secondArray = [];
+    for (let char of timeArray) {
+        if (char === "H") {
+            let index = timeArray.indexOf("H") - 1;
+            while (!isNaN(Number(timeArray[index]))) {
+                hourArray.push(timeArray[index]);
+                index -= 1;
+            }
+            hourArray.reverse();
+            hourArray.push(":");
+        }
+        else if (char === "M") {
+            let index = timeArray.indexOf("M") - 1;
+            while (!isNaN(Number(timeArray[index]))) {
+                minuteArray.push(timeArray[index]);
+                index -= 1;
+            }
+            if (minuteArray.length < 2) {
+                minuteArray.push("0");
+            }
+            minuteArray.reverse();
+            minuteArray.push(":");
+        }
+        else if (char === "S") {
+            let index = timeArray.indexOf("S") - 1;
+            while (!isNaN(Number(timeArray[index]))) {
+                secondArray.push(timeArray[index]);
+                index -= 1;
+            }
+            if (secondArray.length < 2) {
+                secondArray.push("0");
+            }
+            secondArray.reverse();
+        }
+    }
+    if (timeArray.includes("H") && minuteArray.length < 1) {
+        minuteArray.push("0", "0", ":");
+    }
+    if (!timeArray.includes("H") && !timeArray.includes("M")) {
+        secondArray.unshift("0", ":");
+    }
+    console.log(hourArray);
+    console.log(minuteArray);
+    console.log(secondArray);
+    return solvedArray.concat(hourArray, minuteArray, secondArray).join("");
+};
+exports.formatDuration = formatDuration;
+const HW2 = (array) => {
+    let stack = [];
+    let counter = 0;
+    for (let nums of array) {
+        if (nums >= 0 && counter < 10) {
+            stack.push(nums);
+            counter++;
+        }
+    }
+    while (stack.length != 0) {
+        let i = stack.pop();
+        console.log(i);
+    }
+};
+exports.HW2 = HW2;
+const orderWeight = (string) => {
+    let numberArray = string.split(" ").map((nums) => parseInt(nums));
+    if (numberArray.length === 1) {
+        return '';
+    }
+    let solvedArray = [];
+    for (let i = 0; i <= numberArray.length;) {
+        if (numberArray.length === 0) {
+            return solvedArray.join(" ");
+        }
+        else {
+            let lowestNumberWeight = weightFinder(numberArray[numberArray.length - 1]);
+            let numberToPush = numberArray[numberArray.length - 1];
+            let counter = 2;
+            while (true) {
+                if (numberArray.length - counter === -1) {
+                    break;
+                }
+                else if (lowestNumberWeight >
+                    weightFinder(numberArray[numberArray.length - counter])) {
+                    lowestNumberWeight = weightFinder(numberArray[numberArray.length - counter]);
+                    numberToPush = numberArray[numberArray.length - counter];
+                    counter++;
+                }
+                else if (lowestNumberWeight ===
+                    weightFinder(numberArray[numberArray.length - counter]) &&
+                    numberToPush
+                        .toString()
+                        .localeCompare(numberArray[numberArray.length - counter].toString()) === 1) {
+                    lowestNumberWeight = weightFinder(numberArray[numberArray.length - counter]);
+                    numberToPush = numberArray[numberArray.length - counter];
+                    counter++;
+                }
+                else {
+                    counter++;
+                }
+            }
+            solvedArray.push(numberToPush);
+            numberArray.splice(numberArray.indexOf(numberToPush), 1);
+        }
+    }
+    return "error";
+};
+exports.orderWeight = orderWeight;
+function weightFinder(num) {
+    let numArray = num.toString().split("").map(Number);
+    let weight = 0;
+    for (let nums of numArray) {
+        weight += nums;
+    }
+    return weight;
+}
+console.log((0, exports.orderWeight)(""));
 //# sourceMappingURL=codewars-ts-5.js.map

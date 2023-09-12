@@ -375,4 +375,138 @@ function letterShifter(letter: string): string {
   }
 }
 
-console.log(rot13("m"));
+// console.log(rot13("m"));
+
+export const formatDuration = (time: string): string => {
+  const timeArray: string[] = time.split("");
+  let solvedArray: string[] = [];
+  let hourArray: string[] = [];
+  let minuteArray: string[] = [];
+  let secondArray: string[] = [];
+
+  for (let char of timeArray) {
+    if (char === "H") {
+      let index: number = timeArray.indexOf("H") - 1;
+      while (!isNaN(Number(timeArray[index]))) {
+        hourArray.push(timeArray[index]);
+        index -= 1;
+      }
+      hourArray.reverse();
+      hourArray.push(":");
+    } else if (char === "M") {
+      let index: number = timeArray.indexOf("M") - 1;
+      while (!isNaN(Number(timeArray[index]))) {
+        minuteArray.push(timeArray[index]);
+        index -= 1;
+      }
+      if (minuteArray.length < 2) {
+        minuteArray.push("0");
+      }
+      minuteArray.reverse();
+      minuteArray.push(":");
+    } else if (char === "S") {
+      let index: number = timeArray.indexOf("S") - 1;
+      while (!isNaN(Number(timeArray[index]))) {
+        secondArray.push(timeArray[index]);
+        index -= 1;
+      }
+      if (secondArray.length < 2) {
+        secondArray.push("0");
+      }
+      secondArray.reverse();
+    }
+  }
+
+  if (timeArray.includes("H") && minuteArray.length < 1) {
+    minuteArray.push("0", "0", ":");
+  }
+  if (!timeArray.includes("H") && !timeArray.includes("M")) {
+    secondArray.unshift("0", ":");
+  }
+  console.log(hourArray);
+  console.log(minuteArray);
+  console.log(secondArray);
+  return solvedArray.concat(hourArray, minuteArray, secondArray).join("");
+};
+
+// console.log(formatDuration("PT45S"));
+
+export const HW2 = (array: number[]): void => {
+  let stack: number[] = [];
+  let counter: number = 0;
+  for (let nums of array) {
+    if (nums >= 0 && counter < 10) {
+      stack.push(nums);
+      counter++;
+    }
+  }
+  while (stack.length != 0) {
+    let i: number | undefined = stack.pop();
+    console.log(i);
+  }
+};
+
+// HW2([1, 2, -3, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+
+export const orderWeight = (string: string): string => {
+  let numberArray: any = string.split(" ").map((nums) => parseInt(nums));
+  if (numberArray.length === 1) {
+    return "";
+  }
+  let solvedArray: number[] = [];
+  for (let i = 0; i <= numberArray.length; ) {
+    if (numberArray.length === 0) {
+      return solvedArray.join(" ");
+    } else {
+      let lowestNumberWeight: number = weightFinder(
+        numberArray[numberArray.length - 1],
+      );
+      let numberToPush: number = numberArray[numberArray.length - 1];
+      let counter: number = 2;
+      while (true) {
+        if (numberArray.length - counter === -1) {
+          break;
+        } else if (
+          lowestNumberWeight >
+          weightFinder(numberArray[numberArray.length - counter])
+        ) {
+          lowestNumberWeight = weightFinder(
+            numberArray[numberArray.length - counter],
+          );
+          numberToPush = numberArray[numberArray.length - counter];
+          counter++;
+        } else if (
+          lowestNumberWeight ===
+            weightFinder(numberArray[numberArray.length - counter]) &&
+          numberToPush
+            .toString()
+            .localeCompare(
+              numberArray[numberArray.length - counter].toString(),
+            ) === 1
+        ) {
+          lowestNumberWeight = weightFinder(
+            numberArray[numberArray.length - counter],
+          );
+          numberToPush = numberArray[numberArray.length - counter];
+          counter++;
+        } else {
+          counter++;
+        }
+      }
+      solvedArray.push(numberToPush);
+      numberArray.splice(numberArray.indexOf(numberToPush), 1);
+    }
+  }
+  return "error";
+};
+
+function weightFinder(num: number): number {
+  let numArray: number[] = num.toString().split("").map(Number);
+  let weight: number = 0;
+  for (let nums of numArray) {
+    weight += nums;
+  }
+  return weight;
+}
+
+console.log(orderWeight(""));
