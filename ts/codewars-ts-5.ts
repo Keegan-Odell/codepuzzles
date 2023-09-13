@@ -509,4 +509,21 @@ function weightFinder(num: number): number {
   return weight;
 }
 
-console.log(orderWeight(""));
+// console.log(orderWeight(""));
+
+export const moveZeros = (arr: any[]): any[] => {
+  let otherStorage: any[] = [];
+  let zeroStorage: number[] = [];
+  for (let thing of arr) {
+    if (thing === 0) {
+      zeroStorage.push(0);
+    } else {
+      otherStorage.push(thing);
+    }
+  }
+  return otherStorage.concat(zeroStorage);
+};
+
+console.log(
+  moveZeros([9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]),
+);

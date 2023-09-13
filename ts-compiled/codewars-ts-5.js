@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -354,7 +354,7 @@ exports.HW2 = HW2;
 const orderWeight = (string) => {
     let numberArray = string.split(" ").map((nums) => parseInt(nums));
     if (numberArray.length === 1) {
-        return '';
+        return "";
     }
     let solvedArray = [];
     for (let i = 0; i <= numberArray.length;) {
@@ -403,5 +403,19 @@ function weightFinder(num) {
     }
     return weight;
 }
-console.log((0, exports.orderWeight)(""));
+const moveZeros = (arr) => {
+    let otherStorage = [];
+    let zeroStorage = [];
+    for (let thing of arr) {
+        if (thing === 0) {
+            zeroStorage.push(0);
+        }
+        else {
+            otherStorage.push(thing);
+        }
+    }
+    return otherStorage.concat(zeroStorage);
+};
+exports.moveZeros = moveZeros;
+console.log((0, exports.moveZeros)([9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]));
 //# sourceMappingURL=codewars-ts-5.js.map
