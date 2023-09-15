@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -417,5 +417,38 @@ const moveZeros = (arr) => {
     return otherStorage.concat(zeroStorage);
 };
 exports.moveZeros = moveZeros;
-console.log((0, exports.moveZeros)([9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]));
+const maxSequence = (arr) => {
+    let sumToBeat = 0;
+    let tempArray = [...arr];
+    if (arr.length === 0) {
+        return 0;
+    }
+    else if (findNeg(arr)) {
+        return arr.reduce((acc, curValue) => acc + curValue, 0);
+    }
+    else {
+        for (let i = 0; i < arr.length; i++) {
+            tempArray.splice(0, i);
+            while (tempArray.length != 0) {
+                let sum = tempArray.reduce((acc, curValue) => acc + curValue, 0);
+                if (sum > sumToBeat) {
+                    sumToBeat = sum;
+                }
+                tempArray.pop();
+            }
+            tempArray = [...arr];
+        }
+    }
+    return sumToBeat;
+};
+exports.maxSequence = maxSequence;
+function findNeg(arr) {
+    for (let nums of arr) {
+        if (nums < 0) {
+            return false;
+        }
+    }
+    return true;
+}
+console.log((0, exports.maxSequence)([-2, -1, -3, -4, -1, -2, -1, -5, -4]));
 //# sourceMappingURL=codewars-ts-5.js.map

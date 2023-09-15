@@ -524,6 +524,43 @@ export const moveZeros = (arr: any[]): any[] => {
   return otherStorage.concat(zeroStorage);
 };
 
-console.log(
-  moveZeros([9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]),
-);
+// console.log(
+//   moveZeros([9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9]),
+// );
+
+export const maxSequence = (arr: number[]): number => {
+  let sumToBeat: number = 0;
+  let tempArray: number[] = [...arr];
+  if (arr.length === 0) {
+    return 0;
+  } else if (findNeg(arr)) {
+    return arr.reduce((acc, curValue) => acc + curValue, 0);
+  } else {
+    for (let i = 0; i < arr.length; i++) {
+      tempArray.splice(0, i);
+      while (tempArray.length != 0) {
+        let sum: number = tempArray.reduce(
+          (acc, curValue) => acc + curValue,
+          0,
+        );
+        if (sum > sumToBeat) {
+          sumToBeat = sum;
+        }
+        tempArray.pop();
+      }
+      tempArray = [...arr];
+    }
+  }
+  return sumToBeat;
+};
+
+function findNeg(arr: number[]): boolean {
+  for (let nums of arr) {
+    if (nums < 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(maxSequence([-2, -1, -3, -4, -1, -2, -1, -5, -4]));
