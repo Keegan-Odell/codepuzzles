@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -450,5 +450,36 @@ function findNeg(arr) {
     }
     return true;
 }
-console.log((0, exports.maxSequence)([-2, -1, -3, -4, -1, -2, -1, -5, -4]));
+const generateHashtag = (str) => {
+    let stringLength = 0;
+    let spaceBoolean = true;
+    let strArray = str.split("");
+    for (let chars of str) {
+        if (chars !== " ") {
+            stringLength++;
+        }
+    }
+    if (stringLength > 139 || stringLength < 1) {
+        return false;
+    }
+    else {
+        for (let i = 0; i < strArray.length; i++) {
+            if (spaceBoolean) {
+                strArray[i] = strArray[i].toUpperCase();
+                spaceBoolean = false;
+            }
+            if (strArray[i] === " ") {
+                spaceBoolean = true;
+            }
+        }
+        strArray.unshift("#");
+        return strArray
+            .filter((item) => {
+            return item !== " ";
+        })
+            .join("");
+    }
+};
+exports.generateHashtag = generateHashtag;
+console.log((0, exports.generateHashtag)("code" + " ".repeat(140) + "wars"));
 //# sourceMappingURL=codewars-ts-5.js.map

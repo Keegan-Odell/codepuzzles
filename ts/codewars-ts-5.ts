@@ -563,4 +563,36 @@ function findNeg(arr: number[]): boolean {
   return true;
 }
 
-console.log(maxSequence([-2, -1, -3, -4, -1, -2, -1, -5, -4]));
+// console.log(maxSequence([-2, -1, -3, -4, -1, -2, -1, -5, -4]));
+
+export const generateHashtag = (str: string): string | boolean => {
+  let stringLength: number = 0;
+  let spaceBoolean: boolean = true;
+  let strArray: string[] = str.split("");
+  for (let chars of str) {
+    if (chars !== " ") {
+      stringLength++;
+    }
+  }
+  if (stringLength > 139 || stringLength < 1) {
+    return false;
+  } else {
+    for (let i = 0; i < strArray.length; i++) {
+      if (spaceBoolean) {
+        strArray[i] = strArray[i].toUpperCase();
+        spaceBoolean = false;
+      }
+      if (strArray[i] === " ") {
+        spaceBoolean = true;
+      }
+    }
+    strArray.unshift("#");
+    return strArray
+      .filter((item: string): boolean => {
+        return item !== " ";
+      })
+      .join("");
+  }
+};
+
+console.log(generateHashtag("code" + " ".repeat(140) + "wars"));
