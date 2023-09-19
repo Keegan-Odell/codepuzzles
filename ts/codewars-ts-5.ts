@@ -595,4 +595,36 @@ export const generateHashtag = (str: string): string | boolean => {
   }
 };
 
-console.log(generateHashtag("code" + " ".repeat(140) + "wars"));
+// console.log(generateHashtag("code" + " ".repeat(140) + "wars"));
+
+export const cakes = (
+  recipe: Record<string, number>,
+  available: Record<string, number>,
+): number => {
+  let lowestAmount: number = Number.MAX_VALUE;
+  const recipeItems: string[] = Object.keys(recipe);
+  const availableItems: string[] = Object.keys(available);
+  for (let items of recipeItems) {
+    if (!availableItems.includes(items)) {
+      return 0;
+    }
+    let value = recipe[items];
+    for (let aItems of availableItems) {
+      let aValue = available[aItems];
+      if (items === aItems) {
+        let amount: number = aValue / value;
+        if (amount < lowestAmount) {
+          lowestAmount = amount;
+        }
+      }
+    }
+  }
+  return Math.floor(lowestAmount);
+};
+
+console.log(
+  cakes(
+    { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 },
+    { sugar: 500, flour: 2000, milk: 2000 },
+  ),
+);

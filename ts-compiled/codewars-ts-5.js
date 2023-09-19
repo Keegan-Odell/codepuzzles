@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -481,5 +481,27 @@ const generateHashtag = (str) => {
     }
 };
 exports.generateHashtag = generateHashtag;
-console.log((0, exports.generateHashtag)("code" + " ".repeat(140) + "wars"));
+const cakes = (recipe, available) => {
+    let lowestAmount = Number.MAX_VALUE;
+    const recipeItems = Object.keys(recipe);
+    const availableItems = Object.keys(available);
+    for (let items of recipeItems) {
+        if (!availableItems.includes(items)) {
+            return 0;
+        }
+        let value = recipe[items];
+        for (let aItems of availableItems) {
+            let aValue = available[aItems];
+            if (items === aItems) {
+                let amount = aValue / value;
+                if (amount < lowestAmount) {
+                    lowestAmount = amount;
+                }
+            }
+        }
+    }
+    return Math.floor(lowestAmount);
+};
+exports.cakes = cakes;
+console.log((0, exports.cakes)({ apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 }, { sugar: 500, flour: 2000, milk: 2000 }));
 //# sourceMappingURL=codewars-ts-5.js.map
