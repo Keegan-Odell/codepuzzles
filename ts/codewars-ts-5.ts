@@ -622,9 +622,34 @@ export const cakes = (
   return Math.floor(lowestAmount);
 };
 
-console.log(
-  cakes(
-    { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 },
-    { sugar: 500, flour: 2000, milk: 2000 },
-  ),
-);
+// console.log(
+//   cakes(
+//     { apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 },
+//     { sugar: 500, flour: 2000, milk: 2000 },
+//   ),
+// );
+
+export const firstNonRepeatingLetter = (s: string): string => {
+  //1. break word into array - gonna use split method then check with console log to see if it works
+  let stringArray: string[] = s.split("");
+  //2. counter to count how many times it appears
+  let counter: number = 0;
+  //3. double loop first grabs letter to compare second compares that letter -  gonna check each loop with console.log
+  for (let letter of stringArray) {
+    for (let comparisonLetter of stringArray) {
+      if (letter.toUpperCase() === comparisonLetter.toUpperCase()) {
+        counter++;
+      }
+    }
+    //this means its a unique letter return
+    if (counter === 1) {
+      return letter;
+    }
+    //turn counter back to 0
+    counter = 0;
+  }
+  //return logic for no unique letters
+  return "";
+};
+
+console.log(firstNonRepeatingLetter("sTreSS"));

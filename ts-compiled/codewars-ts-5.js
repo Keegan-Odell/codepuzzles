@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -503,5 +503,22 @@ const cakes = (recipe, available) => {
     return Math.floor(lowestAmount);
 };
 exports.cakes = cakes;
-console.log((0, exports.cakes)({ apples: 3, flour: 300, sugar: 150, milk: 100, oil: 100 }, { sugar: 500, flour: 2000, milk: 2000 }));
+const firstNonRepeatingLetter = (s) => {
+    let stringArray = s.split("");
+    let counter = 0;
+    for (let letter of stringArray) {
+        for (let comparisonLetter of stringArray) {
+            if (letter.toUpperCase() === comparisonLetter.toUpperCase()) {
+                counter++;
+            }
+        }
+        if (counter === 1) {
+            return letter;
+        }
+        counter = 0;
+    }
+    return "";
+};
+exports.firstNonRepeatingLetter = firstNonRepeatingLetter;
+console.log((0, exports.firstNonRepeatingLetter)("sTreSS"));
 //# sourceMappingURL=codewars-ts-5.js.map
