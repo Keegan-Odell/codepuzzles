@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -520,5 +520,19 @@ const firstNonRepeatingLetter = (s) => {
     return "";
 };
 exports.firstNonRepeatingLetter = firstNonRepeatingLetter;
-console.log((0, exports.firstNonRepeatingLetter)("sTreSS"));
+const scramble = (str1, str2) => {
+    let str1Map = new Map();
+    for (let letter of str1) {
+        str1Map.set(letter, (str1Map.get(letter) || 0) + 1);
+    }
+    for (const char of str2) {
+        if (!str1Map.has(char) || str1Map.get(char) === 0) {
+            return false;
+        }
+        str1Map.set(char, str1Map.get(char) - 1);
+    }
+    return true;
+};
+exports.scramble = scramble;
+(0, exports.scramble)("asdfa", "fdsa");
 //# sourceMappingURL=codewars-ts-5.js.map

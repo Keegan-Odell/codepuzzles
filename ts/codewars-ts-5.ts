@@ -652,4 +652,21 @@ export const firstNonRepeatingLetter = (s: string): string => {
   return "";
 };
 
-console.log(firstNonRepeatingLetter("sTreSS"));
+// console.log(firstNonRepeatingLetter("sTreSS"));
+
+export const scramble = (str1: string, str2: string): boolean => {
+  let str1Map: Map<string, number> = new Map();
+  for (let letter of str1) {
+    str1Map.set(letter, (str1Map.get(letter) || 0) + 1);
+  }
+  for (const char of str2) {
+    if (!str1Map.has(char) || str1Map.get(char) === 0) {
+      return false;
+    }
+    str1Map.set(char, str1Map.get(char)! - 1);
+  }
+
+  return true;
+};
+
+scramble("asdfa", "fdsa");
