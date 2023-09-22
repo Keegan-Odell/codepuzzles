@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -525,6 +525,7 @@ const scramble = (str1, str2) => {
     for (let letter of str1) {
         str1Map.set(letter, (str1Map.get(letter) || 0) + 1);
     }
+    console.log(str1Map);
     for (const char of str2) {
         if (!str1Map.has(char) || str1Map.get(char) === 0) {
             return false;
@@ -534,5 +535,27 @@ const scramble = (str1, str2) => {
     return true;
 };
 exports.scramble = scramble;
-(0, exports.scramble)("asdfa", "fdsa");
+const score = (dice) => {
+    let roll = new Map();
+    let score = 0;
+    for (let rolls of dice) {
+        roll.set(rolls, (roll.get(rolls) || 0) + 1);
+    }
+    console.log(roll.get(3));
+    for (let [key, value] of roll) {
+        if (roll.get(key) >= 3 && key !== 1) {
+            score += key * 100;
+            roll.set(key, roll.get(key) - 3);
+        }
+        else if (roll.get(key) >= 3 && key === 1) {
+            score += key * 1000;
+            roll.set(key, roll.get(key) - 3);
+        }
+    }
+    score += (roll.get(1) || 0) * 100;
+    score += (roll.get(5) || 0) * 50;
+    return score;
+};
+exports.score = score;
+console.log((0, exports.score)([1, 1, 1, 1, 3]));
 //# sourceMappingURL=codewars-ts-5.js.map

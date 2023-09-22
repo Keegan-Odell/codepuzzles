@@ -659,6 +659,7 @@ export const scramble = (str1: string, str2: string): boolean => {
   for (let letter of str1) {
     str1Map.set(letter, (str1Map.get(letter) || 0) + 1);
   }
+  console.log(str1Map);
   for (const char of str2) {
     if (!str1Map.has(char) || str1Map.get(char) === 0) {
       return false;
@@ -669,4 +670,27 @@ export const scramble = (str1: string, str2: string): boolean => {
   return true;
 };
 
-scramble("asdfa", "fdsa");
+// scramble("aabcccd", "fdsa");
+
+export const score = (dice: number[]): number => {
+  let roll: Map<number, number> = new Map();
+  let score: number = 0;
+  for (let rolls of dice) {
+    roll.set(rolls, (roll.get(rolls) || 0) + 1);
+  }
+  console.log(roll.get(3));
+  for (let [key, value] of roll) {
+    if (roll.get(key)! >= 3 && key !== 1) {
+      score += key * 100;
+      roll.set(key, roll.get(key)! - 3);
+    } else if (roll.get(key)! >= 3 && key === 1) {
+      score += key * 1000;
+      roll.set(key, roll.get(key)! - 3);
+    }
+  }
+  score += (roll.get(1) || 0) * 100;
+  score += (roll.get(5) || 0) * 50;
+  return score;
+};
+
+console.log(score([1, 1, 1, 1, 3]));
