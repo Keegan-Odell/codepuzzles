@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -557,5 +557,26 @@ const score = (dice) => {
     return score;
 };
 exports.score = score;
-console.log((0, exports.score)([1, 1, 1, 1, 3]));
+const zeros = (n) => {
+    if (n === 0) {
+        return 0;
+    }
+    else {
+        let kMax = 0;
+        while (Math.pow(5, kMax) <= n) {
+            kMax += 1;
+        }
+        kMax -= 1;
+        let totalZeros = 0;
+        let onGoingTotal;
+        while (kMax !== 0) {
+            onGoingTotal = Math.floor(n / Math.pow(5, kMax));
+            totalZeros += onGoingTotal;
+            kMax -= 1;
+        }
+        return totalZeros;
+    }
+};
+exports.zeros = zeros;
+console.log((0, exports.zeros)(0));
 //# sourceMappingURL=codewars-ts-5.js.map

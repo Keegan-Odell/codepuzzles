@@ -693,4 +693,26 @@ export const score = (dice: number[]): number => {
   return score;
 };
 
-console.log(score([1, 1, 1, 1, 3]));
+// console.log(score([1, 1, 1, 1, 3]));
+
+export const zeros = (n: number): number => {
+  if (n === 0) {
+    return 0;
+  } else {
+    let kMax: number = 0;
+    while (Math.pow(5, kMax) <= n) {
+      kMax += 1;
+    }
+    kMax -= 1;
+    let totalZeros: number = 0;
+    let onGoingTotal: number;
+    while (kMax !== 0) {
+      onGoingTotal = Math.floor(n / Math.pow(5, kMax));
+      totalZeros += onGoingTotal;
+      kMax -= 1;
+    }
+    return totalZeros;
+  }
+};
+
+console.log(zeros(0));
