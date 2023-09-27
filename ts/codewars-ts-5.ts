@@ -715,4 +715,53 @@ export const zeros = (n: number): number => {
   }
 };
 
-console.log(zeros(0));
+// console.log(zeros(0));
+
+export const listSquared = (m: number, n: number): number[][] => {
+  let arrayOfPasses: number[][] = [];
+  for (let i: number = m; i <= n; i++) {
+    if (squaredTest(i) !== false) {
+      // @ts-ignore
+      arrayOfPasses.push(squaredTest(i));
+    }
+  }
+  return arrayOfPasses;
+};
+
+function squaredTest(num: number): number[] | boolean {
+  if (num === 1) {
+    return [1, 1];
+  }
+
+  let divisorArray: number[] = [];
+  let counter: number = 0;
+  while (counter < num + 1) {
+    if (num % counter === 0) {
+      divisorArray.push(counter);
+    }
+    counter++;
+  }
+  let squaredNumbers: number[] = divisorArray.map((number) => {
+    return number * number;
+  });
+  let squaredAdded: number = squaredNumbers.reduce(
+    (accum, curVal) => accum + curVal,
+    0,
+  );
+  if (squaredAdded !== 1 && isPerfectSquare(squaredAdded)) {
+    return [num, squaredAdded];
+  }
+  return false;
+}
+
+function isPerfectSquare(num: number): boolean {
+  if (num < 0) {
+    return false;
+  }
+
+  const squareRoot: number = Math.sqrt(num);
+
+  return squareRoot === Math.floor(squareRoot);
+}
+
+console.log(listSquared(1, 42));

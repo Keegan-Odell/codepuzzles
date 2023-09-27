@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -578,5 +578,43 @@ const zeros = (n) => {
     }
 };
 exports.zeros = zeros;
-console.log((0, exports.zeros)(0));
+const listSquared = (m, n) => {
+    let arrayOfPasses = [];
+    for (let i = m; i <= n; i++) {
+        if (squaredTest(i) !== false) {
+            arrayOfPasses.push(squaredTest(i));
+        }
+    }
+    return arrayOfPasses;
+};
+exports.listSquared = listSquared;
+function squaredTest(num) {
+    if (num === 1) {
+        return [1, 1];
+    }
+    let divisorArray = [];
+    let counter = 0;
+    while (counter < num + 1) {
+        if (num % counter === 0) {
+            divisorArray.push(counter);
+        }
+        counter++;
+    }
+    let squaredNumbers = divisorArray.map((number) => {
+        return number * number;
+    });
+    let squaredAdded = squaredNumbers.reduce((accum, curVal) => accum + curVal, 0);
+    if (squaredAdded !== 1 && isPerfectSquare(squaredAdded)) {
+        return [num, squaredAdded];
+    }
+    return false;
+}
+function isPerfectSquare(num) {
+    if (num < 0) {
+        return false;
+    }
+    const squareRoot = Math.sqrt(num);
+    return squareRoot === Math.floor(squareRoot);
+}
+console.log((0, exports.listSquared)(1, 42));
 //# sourceMappingURL=codewars-ts-5.js.map
