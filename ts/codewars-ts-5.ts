@@ -764,4 +764,42 @@ function isPerfectSquare(num: number): boolean {
   return squareRoot === Math.floor(squareRoot);
 }
 
-console.log(listSquared(1, 42));
+// console.log(listSquared(1, 42));
+
+export const pickPeaks = (
+  arr: number[],
+): { pos: number[]; peaks: number[] } => {
+  let peak: number[] = [];
+  let position: number[] = [];
+  for (let i = 0; i < arr.length; i++) {
+    {
+      if (
+        arr[i] > arr[i - 1] &&
+        arr[i] >= arr[i + 1] &&
+        plateauChecker(arr, i)
+      ) {
+        peak.push(arr[i]);
+        position.push(i);
+      }
+    }
+  }
+  return {
+    pos: position,
+    peaks: peak,
+  };
+};
+
+function plateauChecker(arr: number[], position: number): boolean {
+  let numberToCheck: number = arr[position];
+  for (let i = position; i < arr.length; i++) {
+    if (numberToCheck > arr[i + 1]) {
+      return true;
+    }
+    if (numberToCheck < arr[i + 1]) {
+      return false;
+    }
+  }
+  return false;
+}
+
+console.log(pickPeaks([1, 2, 6, 1, 5, 5, 5]));

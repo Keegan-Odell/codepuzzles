@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.pickPeaks = exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -616,5 +616,36 @@ function isPerfectSquare(num) {
     const squareRoot = Math.sqrt(num);
     return squareRoot === Math.floor(squareRoot);
 }
-console.log((0, exports.listSquared)(1, 42));
+const pickPeaks = (arr) => {
+    let peak = [];
+    let position = [];
+    for (let i = 0; i < arr.length; i++) {
+        {
+            if (arr[i] > arr[i - 1] &&
+                arr[i] >= arr[i + 1] &&
+                plateauChecker(arr, i)) {
+                peak.push(arr[i]);
+                position.push(i);
+            }
+        }
+    }
+    return {
+        pos: position,
+        peaks: peak,
+    };
+};
+exports.pickPeaks = pickPeaks;
+function plateauChecker(arr, position) {
+    let numberToCheck = arr[position];
+    for (let i = position; i < arr.length; i++) {
+        if (numberToCheck > arr[i + 1]) {
+            return true;
+        }
+        if (numberToCheck < arr[i + 1]) {
+            return false;
+        }
+    }
+    return false;
+}
+console.log((0, exports.pickPeaks)([1, 2, 6, 1, 5, 5, 5]));
 //# sourceMappingURL=codewars-ts-5.js.map
