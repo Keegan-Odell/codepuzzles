@@ -802,4 +802,23 @@ function plateauChecker(arr: number[], position: number): boolean {
   return false;
 }
 
-console.log(pickPeaks([1, 2, 6, 1, 5, 5, 5]));
+// console.log(pickPeaks([1, 2, 6, 1, 5, 5, 5]));
+
+export const sumPairs = (
+  ints: number[],
+  s: number,
+): [number, number] | undefined => {
+  let seenNumbers: Record<number, boolean> = {};
+
+  for (let num of ints) {
+    let compliment: number = s - num;
+    if (seenNumbers[compliment]) {
+      return [compliment, num];
+    }
+    seenNumbers[num] = true;
+  }
+
+  return undefined;
+};
+
+console.log(sumPairs([10, 5, 2, 3, 7, 5], 10));

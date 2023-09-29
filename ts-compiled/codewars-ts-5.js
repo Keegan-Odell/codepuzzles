@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pickPeaks = exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.sumPairs = exports.pickPeaks = exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -647,5 +647,18 @@ function plateauChecker(arr, position) {
     }
     return false;
 }
-console.log((0, exports.pickPeaks)([1, 2, 6, 1, 5, 5, 5]));
+const sumPairs = (ints, s) => {
+    let seenNumbers = {};
+    for (let num of ints) {
+        let compliment = s - num;
+        console.log(seenNumbers[0]);
+        if (seenNumbers[compliment]) {
+            return [compliment, num];
+        }
+        seenNumbers[num] = true;
+    }
+    return undefined;
+};
+exports.sumPairs = sumPairs;
+console.log((0, exports.sumPairs)([10, 5, 2, 3, 7, 5], 10));
 //# sourceMappingURL=codewars-ts-5.js.map
