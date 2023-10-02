@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sumPairs = exports.pickPeaks = exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
+exports.gap = exports.sumPairs = exports.pickPeaks = exports.listSquared = exports.zeros = exports.score = exports.scramble = exports.firstNonRepeatingLetter = exports.cakes = exports.generateHashtag = exports.maxSequence = exports.moveZeros = exports.orderWeight = exports.HW2 = exports.formatDuration = exports.rot13 = exports.productFib = exports.dirReduc = exports.pigIt = exports.greet = exports.alphabetPosition = exports.breakCamel = exports.uniqueInOrder = exports.toCamelCase = exports.isPangram = exports.order = exports.arrayDiff = exports.isValidWalk = exports.duplicateEncode = exports.duplicateCount = void 0;
 function duplicateCount(text) {
     let textLowerArray = Array.from(text.toLowerCase());
     let numberMap = new Map();
@@ -651,7 +651,6 @@ const sumPairs = (ints, s) => {
     let seenNumbers = {};
     for (let num of ints) {
         let compliment = s - num;
-        console.log(seenNumbers[0]);
         if (seenNumbers[compliment]) {
             return [compliment, num];
         }
@@ -660,5 +659,28 @@ const sumPairs = (ints, s) => {
     return undefined;
 };
 exports.sumPairs = sumPairs;
-console.log((0, exports.sumPairs)([10, 5, 2, 3, 7, 5], 10));
+const gap = (gap, start, end) => {
+    let lastPrime = 0;
+    for (let i = start; i < end; i++) {
+        if (isPrime(i)) {
+            if (i - lastPrime === gap) {
+                return [lastPrime, i];
+            }
+            lastPrime = i;
+        }
+    }
+    return null;
+};
+exports.gap = gap;
+function isPrime(num) {
+    if (num <= 1) {
+        return false;
+    }
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+            return false;
+        }
+    }
+    return true;
+}
 //# sourceMappingURL=codewars-ts-5.js.map

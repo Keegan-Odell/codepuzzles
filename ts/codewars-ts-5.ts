@@ -821,4 +821,37 @@ export const sumPairs = (
   return undefined;
 };
 
-console.log(sumPairs([10, 5, 2, 3, 7, 5], 10));
+// console.log(sumPairs([10, 5, 2, 3, 7, 5], 10));
+
+export const gap = (
+  gap: number,
+  start: number,
+  end: number,
+): [number, number] | null => {
+  let lastPrime: number = 0;
+
+  for (let i: number = start; i < end; i++) {
+    if (isPrime(i)) {
+      if (i - lastPrime === gap) {
+        return [lastPrime, i];
+      }
+      lastPrime = i;
+    }
+  }
+
+  return null;
+};
+
+function isPrime(num: number): boolean {
+  if (num <= 1) {
+    return false;
+  }
+
+  for (let i: number = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
